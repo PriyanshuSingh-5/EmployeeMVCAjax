@@ -1,0 +1,294 @@
+﻿@model EmployeeMVC.Models.EmployeeDTO
+           
+
+@{
+    ViewBag.Title = "AddEmployee";
+}
+
+
+@*<h2>Export to Excel</h2>*@
+@using (Html.BeginForm("ExportFile", "Employee", FormMethod.Post))
+{
+    <button type="submit" name=" export">ExportToExcel</button>
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.EmployeeId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.EmployeeId)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.EmployeeId)
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.Name)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.ProfileImage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.ProfileImage)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.ProfileImage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.Gender, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.Gender)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.Gender)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.Department, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.Department)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.Department)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.Salary, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.Salary)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.Salary)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.StartDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.StartDate)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.StartDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeModel.Notes, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeModel.Notes)
+                @Html.ValidationMessageFor(model => model.EmployeeModel.Notes)
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.EmployeeModel.EmployeeId)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+        
+    </div>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+<table border="1" id="emptable">
+    <thead>
+        <tr>
+            <th>
+                EmployeeId
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                ProfileImage
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Salary
+            </th>
+            <th>
+                StartDate
+            </th>
+            <th>
+                Notes
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    
+    
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EmployeeList)
+        {
+            <tr>
+                <td class="EmployeeId">
+                    @*@Html.DisplayFor(modelItem => item.EmployeeId)*@
+                    <span>@item.EmployeeId</span>
+                </td>
+                <td class="Name">
+                    <span>@item.Name</span>
+                    @*@Html.DisplayFor(modelItem => item.Name)*@
+                    <input type="text" value="@item.Name" style="display:none;" />
+                </td>
+                <td class="ProfileImage">
+                    <span>@item.ProfileImage</span>
+
+                    @*@Html.DisplayFor(modelItem => item.ProfileImage)*@
+                    <input type="text" value="@item.ProfileImage" style="display:none;" />
+                </td>
+                <td class="Gender">
+                    <span>@item.Gender</span>
+                    @*@Html.DisplayFor(modelItem => item.Gender)*@
+                    <input type="text" value="@item.Gender" style="display:none;" />
+                </td>
+                <td class="Department">
+                    <span>@item.Department</span>
+                    @*@Html.DisplayFor(modelItem => item.Department)*@
+                    <input type="text" value="@item.Department" style="display:none;" />
+                </td>
+                <td class="Salary">
+                    <span>@item.Salary</span>
+                    @*@Html.DisplayFor(modelItem => item.Salary)*@
+                    <input type="text" value="@item.Salary" style="display:none;" />
+                </td>
+                <td class="StartDate">
+                    <span>@item.StartDate</span>
+                    @*@Html.DisplayFor(modelItem => item.StartDate)*@
+                    <input type="text" value="@item.StartDate" style="display:none;" />
+                </td>
+                <td class="Notes">
+                    <span>@item.Notes</span>
+                    @*@Html.DisplayFor(modelItem => item.Notes)*@
+                    <input type="text" value="@item.Notes" style="display:none;" />
+                </td>
+                
+                <td>
+                    <a class="btnEdit" href="javascript:;">Edit</a>
+                    <a class="btnUpdate" href="javascript:;" style="display:none">Update</a>
+                    <a class="btnCancel" href="javascript:;" style="display:none">Cancel</a>
+                    @Html.ActionLink("Delete", "DeleteEmployee", new { id = item.EmployeeId })
+                    
+                </td>
+            </tr>
+        }
+</table>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+
+   
+    
+
+    //Edit event handler.
+    $("body").on("click", "#emptable .btnEdit", function () {
+        debugger;
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").show();
+                $(this).find("span").hide();
+            }
+        });
+        row.find(".btnUpdate").show();
+        row.find(".btnCancel").show();
+        row.find(".btnDelete").hide();
+        $(this).hide();
+    });
+
+    //Update event handler.
+    $("body").on("click", "#emptable .btnUpdate", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                span.html(input.val());
+                span.show();
+                input.hide();
+            }
+        });
+        row.find(".btnEdit").show();
+        row.find(".btnDelete").show();
+        row.find(".btnCancel").hide();
+        $(this).hide();
+
+        var EmpObj = {
+        EmployeeId: row.find(".EmployeeId").find("span").html(),
+        Name : row.find(".Name").find("span").html(),
+        ProfileImage : row.find(".ProfileImage").find("span").html(),
+        Gender : row.find(".Gender").find("span").html(),
+        Department : row.find(".Department").find("span").html(),
+        Salary : row.find(".Salary").find("span").html(),
+        StartDate : row.find(".StartDate").find("span").html(),
+        Notes : row.find(".Notes").find("span").html(),
+            
+        };
+        if (!EmpObj.EmployeeId || EmpObj.EmployeeId <= 0) {
+            alert("Invalid Id!");
+            return false;
+        }
+        $.ajax({
+            url: "/Employee/UpdateEmp",
+            data: JSON.stringify(EmpObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                ClearAllInput();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    });
+
+
+    //Cancel event handler.
+    $("body").on("click", "#emptable .btnCancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                input.val(span.html());
+                span.show();
+                input.hide();
+            }
+        });
+        row.find(".btnEdit").show();
+        row.find(".btnDelete").show();
+        row.find(".btnUpdate").hide();
+        $(this).hide();
+
+
+    });
+
+    //"dom" : 'Bftrip',
+    //"Buttons" : [
+
+    //]
+
+    </script>

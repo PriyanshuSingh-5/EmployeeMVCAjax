@@ -1,0 +1,262 @@
+﻿@model EmployeeMVC.Models.EmployeeModel
+
+@{
+    ViewBag.Title = "NewEmployee";
+}
+
+<h2>NewEmployee</h2>
+
+
+@using (Html.BeginForm("ExportFile", "Employee", FormMethod.Post))
+{
+    <button type="submit" name=" export">ExportToExcel</button>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.EmployeeModel.EmployeeId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmployeeModel.EmployeeId)
+                    @Html.ValidationMessageFor(model => model.EmployeeModel.EmployeeId)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProfileImage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProfileImage)
+                @Html.ValidationMessageFor(model => model.ProfileImage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gender)
+                @Html.ValidationMessageFor(model => model.Gender)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Department, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Department)
+                @Html.ValidationMessageFor(model => model.Department)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Salary, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Salary)
+                @Html.ValidationMessageFor(model => model.Salary)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate)
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes)
+                @Html.ValidationMessageFor(model => model.Notes)
+            </div>
+        </div>
+        @*@Html.HiddenFor(model => model.EmployeeModel.EmployeeId)*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+<table border="1" id="emptable">
+    <thead>
+        <tr>
+            <th>
+                EmployeeId
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                ProfileImage
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Salary
+            </th>
+            <th>
+                StartDate
+            </th>
+            <th>
+                Notes
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model as IEnumerable<EmployeeMVC.Models.EmployeeModel>)
+        {
+            <tr>
+                <td class="EmployeeId">
+                    @item.EmployeeId
+                </td>
+                <td class="Name">
+                    @item.Name
+                    @*@Html.DisplayFor(modelItem => item.Name)*@
+                    <input type="text" value="@item.Name" style="display:none;" />
+                </td>
+                <td class="ProfileImage">
+
+                    @Html.DisplayFor(modelItem => item.ProfileImage)
+                    <input type="text" value="@item.ProfileImage" style="display:none;" />
+                </td>
+                <td class="Gender">
+
+                    @Html.DisplayFor(modelItem => item.Gender)
+                    <input type="text" value="@item.Gender" style="display:none;" />
+                </td>
+                <td class="Department">
+
+                    @Html.DisplayFor(modelItem => item.Department)
+                    <input type="text" value="@item.Department" style="display:none;" />
+                </td>
+                <td class="Salary">
+
+                    @Html.DisplayFor(modelItem => item.Salary)
+                    <input type="text" value="@item.Salary" style="display:none;" />
+                </td>
+                <td class="StartDate">
+
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                    <input type="text" value="@item.StartDate" style="display:none;" />
+                </td>
+                <td class="Notes">
+
+                    @Html.DisplayFor(modelItem => item.Notes)
+                    <input type="text" value="@item.Notes" style="display:none;" />
+                </td>
+                <td>
+                <td>
+                    <a href="javascript:;" class="Edit">Edit</a>
+                    <a href="javascript:;" class="Update" style="display:none;">Update</a>
+                    <a href="javascript:;" class="Cancel" style="display:none;">Cancel</a>
+                    @*@Html.ActionLink("Edit", "UpdateEmployee", new { id = item.EmployeeId })*@
+                    @Html.ActionLink("Delete", "DeleteEmployee", new { id = item.EmployeeId })
+                    @*<a asp-action="DeleteEmployee" asp-route-id="@item.EmployeeId"> Delete</a>*@
+                </td>
+            </tr>
+        }
+</table>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    //edit
+    $("body").on("click", "#emptable .Edit", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("td").hide();
+                $(this).find("input").show();
+            }
+        });
+        row.find(".Edit").hide();
+        row.find(".Update").show();
+        row.find(".Cancel").show();
+    });
+
+    //cancel
+    $("body").on("click", "#emptable .Cancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("td").show();
+                $(this).find("input").hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Update").hide();
+        row.find(".Cancel").hide();
+    });
+
+    $("body").on("click", "#emptable .Update", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var td = $(this).find("td");
+                var input = $(this).find("input");
+                td.html(input.val());
+                td.show();
+                input.hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Update").hide();
+        row.find(".Cancel").hide();
+        $(this).hide();
+
+        var empupdated = {};
+        empupdated.EmployeeId = row.find("EmployeeId").find("td").html();
+        empupdated.Name = row.find("Name").find("td").html();
+        empupdated.ProfileImage = row.find("ProfileImage").find("td").html();
+        empupdated.Gender = row.find("Gender").find("td").html();
+        empupdated.Department = row.find("Department").find("td").html();
+        empupdated.Salary = row.find("Salary").find("td").html();
+        empupdated.StartDate = row.find("StartDate").find("td").html();
+        empupdated.Notes = row.find("Notes").find("td").html();
+
+        $.ajax({
+            type: "POST",
+            url: "/Employee/EmpUpdate",
+            data: '{emp: ' + JSON.stringify(empupdated) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+
+        });
+    });
+
+</script>
